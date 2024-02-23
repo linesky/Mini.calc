@@ -8,8 +8,7 @@ import subprocess
 import shutil
 import os
 
-def rgbToHex(rgb):
-    return '#%02x%02x%02x' % rgb
+
 class BareboneBuilder:
     def __init__(self, root):
         i:int=0
@@ -40,45 +39,7 @@ class BareboneBuilder:
         parc:list=[]
         try:
             nnreturn=str(self.text_.get("1.0", "end-1c"))
-
-            operations="+"
-            parc= nnreturn.split(operations)
-            parcn=len(parc)
-            if parcn!=2:
-                operations="-"
-                parc= nnreturn.split(operations)
-                parcn=len(parc)
-            if parcn!=2:
-                operations="-"
-                parc= nnreturn.split(operations)
-                parcn=len(parc)
-            if parcn!=2:
-                operations="*"
-                parc= nnreturn.split(operations)
-                parcn=len(parc)
-            if parcn!=2:
-                operations="/"
-                print(operations)
-                parc= nnreturn.split(operations)
-                parcn=len(parc)
-            n1=float(parc[0])
-            n2=float(parc[1])
-            if parcn==2:
-                if operations=="+":
-                    rreturn=n1+n2
-                    nreturn=nnreturn+"="+str(rreturn)+"\n"
-                if operations=="-":
-                    rreturn=n1-n2
-                    nreturn=nnreturn+"="+str(rreturn)+"\n"
-                if operations=="*":
-                    rreturn=n1*n2
-                    nreturn=nnreturn+"="+str(rreturn)+"\n"
-                if operations=="/":
-                    rreturn=n1/n2
-                    nreturn=nnreturn+"="+str(rreturn)+"\n"
-                
-            else:
-                    nreturn="error\n"
+            nreturn=nnreturn + "=" + str(eval(nnreturn))+"\n"
         except:
             nreturn="error\n"
         self.text_area.insert(tk.END,nreturn)
